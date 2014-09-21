@@ -3,10 +3,11 @@ from django.db import models
 # Create your models here.
 
 class TortazoScan(models.Model):
-    scanDate = models.DateTimeField(auto_now=True)
+    scandate = models.DateTimeField(auto_now=True)
     class Meta:
         verbose_name = ('scan')
         verbose_name_plural = ('scan')
+        db_table = 'scan'
 
 class TortazoNode(models.Model):
     host = models.CharField(max_length=50)
@@ -14,22 +15,50 @@ class TortazoNode(models.Model):
     reason = models.CharField(max_length=10)
     #self.openPorts = [] #List of TorNodePort objects
     #self.closedFilteredPorts = [] #List of TorNodePort objects
-    nickName = models.CharField()
-    fingerprint = models.CharField()
-    torVersion = models.CharField(max_length=10)
-    contactData = models.CharField(max_length=40)
-    tortazoScan = models.ForeignKey('TortazoScan')
+    nickname = models.CharField(max_length=50)
+    fingerprint = models.CharField(max_length=50)
+    torversion = models.CharField(max_length=10)
+    contact = models.CharField(max_length=40)
+    scanid = models.ForeignKey('TortazoScan', db_column='scanid')
     class Meta:
-        verbose_name = ('node')
-        verbose_name_plural = ('node')
+        verbose_name = ('tornodedata')
+        verbose_name_plural = ('tornodedata')
+        db_table = 'tornodedata'
 
 class TortazoNodePort(models.Model):
-    state = models.CharField()
-    reason = models.CharField()
-    port = models.IntegerField()
+    state = models.CharField(max_length=10)
+    reason = models.CharField(max_length=10)
+    port = models.IntegerField(max_length=6)
     name = models.CharField(max_length=30)
     version = models.CharField(max_length=10)
-    tortazoNode = models.ForeignKey('TortazoNode')
+    tortazonode = models.ForeignKey('TortazoNode', db_column='tornodeid')
     class Meta:
-        verbose_name = ('nodePort')
-        verbose_name_plural = ('nodePort')
+        verbose_name = ('tornodeport')
+        verbose_name_plural = ('tornodeport')
+        db_table = 'tornodeport'
+
+class OnionRepositoryResponses(models.Model):
+    onionaddress = models.CharField(max_length=50)
+    responsecode = models.CharField(max_length=4)
+    responseheaders = models.CharField(max_length=100)
+    oniondescription = models.CharField(max_length=100)
+    servicetype = models.CharField(max_length=4)
+    class Meta:
+        verbose_name = ('onionrepositoryresponses')
+        verbose_name_plural = ('onionrepositoryresponses')
+        db_table = 'onionrepositoryresponses'
+
+class OnionRepositoryProgress(models.Model):
+    partialonionaddress = models.CharField(max_length=10)
+    validchars = models.CharField(max_length=10)
+    startdate = models.DateTimeField(auto_now=True)
+    enddate = models.DateTimeField(auto_now=True)
+    #Progress
+    progressfirstquartet=models.IntegerField()
+    progresssecondquartet=models.IntegerField()
+    progressthirdquartet=models.IntegerField()
+    progressfourthquartet=models.IntegerField()
+    class Meta:
+        verbose_name = ('onionrepositoryprogress')
+        verbose_name_plural = ('onionrepositoryprogress')
+        db_table = 'onionrepositoryprogress'

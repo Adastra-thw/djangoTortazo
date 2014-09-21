@@ -8,12 +8,12 @@ admin.autodiscover()
 
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 
-router.register(r'scans', views.TortazoScanViewSet)
-router.register(r'nodes', views.TortazoNodeViewSet)
-router.register(r'portNodes', views.TortazoNodePortViewSet)
+router.register(r'scans', views.ScanView)
+router.register(r'scan/torNodeData', views.TorNodeView)
+router.register(r'scan/torNodePort', views.TorNodePortView)
+router.register(r'repository/responses', views.OnionResponsesView)
+router.register(r'repository/incremental', views.OnionProgressView)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browseable API.

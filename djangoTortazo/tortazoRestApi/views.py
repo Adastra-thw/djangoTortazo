@@ -1,42 +1,33 @@
-from django.contrib.auth.models import User, Group
+from rest_framework import permissions
 from rest_framework import viewsets
-from djangoTortazo.tortazoRestApi.tortazoSerializers import UserSerializer, GroupSerializer, ScanSerializer, NodeSerializer, NodePortSerializer
-from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort
+from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, OnionResponsesSerializer, OnionProgressSerializer
+from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort, OnionRepositoryResponses, OnionRepositoryProgress
+from rest_framework.decorators import api_view
 
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-
-
-class TortazoScanViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+class ScanView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = TortazoScan.objects.all()
     serializer_class = ScanSerializer
 
-class TortazoNodeViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+class TorNodeView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = TortazoNode.objects.all()
     serializer_class = NodeSerializer
 
-class TortazoNodePortViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
+class TorNodePortView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = TortazoNodePort.objects.all()
     serializer_class = NodePortSerializer
+
+
+class OnionResponsesView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = OnionRepositoryResponses.objects.all()
+    serializer_class = OnionResponsesSerializer
+
+class OnionProgressView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = OnionRepositoryProgress.objects.all()
+    serializer_class = OnionProgressSerializer
+
+
