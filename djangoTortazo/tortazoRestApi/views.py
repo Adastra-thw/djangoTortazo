@@ -2,7 +2,8 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, OnionResponsesSerializer, OnionProgressSerializer
 from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort, OnionRepositoryResponses, OnionRepositoryProgress
-from rest_framework.decorators import api_view
+
+from rest_framework import filters
 
 class ScanView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -13,6 +14,8 @@ class TorNodeView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = TortazoNode.objects.all()
     serializer_class = NodeSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('nickname','scanid',)
 
 class TorNodePortView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
