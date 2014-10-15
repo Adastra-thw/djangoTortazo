@@ -14,6 +14,8 @@ router.register(r'scan/torNodeData', views.TorNodeView)
 router.register(r'scan/torNodePort', views.TorNodePortView)
 router.register(r'repository/responses', views.OnionResponsesView)
 router.register(r'repository/incremental', views.OnionProgressView)
+router.register(r'botnet/bots', views.BotNodeView)
+router.register(r'botnet/locations', views.BotNodeGeoLocationView)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browseable API.

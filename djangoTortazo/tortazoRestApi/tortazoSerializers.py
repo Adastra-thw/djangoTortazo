@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from djangoTortazo.tortazoRestApi.models import TortazoNode, TortazoNodePort, TortazoScan, OnionRepositoryProgress, OnionRepositoryResponses
+from djangoTortazo.tortazoRestApi.models import TortazoNode, TortazoNodePort, TortazoScan, OnionRepositoryProgress, OnionRepositoryResponses, BotNode, BotNodeGeoLocation
 
 
 class ScanSerializer(serializers.ModelSerializer):
@@ -26,7 +26,18 @@ class OnionResponsesSerializer(serializers.ModelSerializer):
 
 class OnionProgressSerializer(serializers.ModelSerializer):
     class Meta:
-        model = OnionRepositoryProgress
+        model = BotNode
         fields = ('partialonionaddress', 'validchars', 'startdate',
                   'enddate', 'progressfirstquartet', 'progresssecondquartet',
                   'progressthirdquartet', 'progressfourthquartet')
+
+class BotNodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BotNode
+        fields = ('nickname', 'userservice', 'password',
+                  'address', 'port', 'servicetype')
+
+class BotNodeGeoLocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BotNodeGeoLocation
+        fields = ('botlatitute', 'botlongitute', 'botnodeid')

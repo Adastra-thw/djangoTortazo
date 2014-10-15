@@ -1,7 +1,7 @@
 from rest_framework import permissions
 from rest_framework import viewsets
-from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, OnionResponsesSerializer, OnionProgressSerializer
-from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort, OnionRepositoryResponses, OnionRepositoryProgress
+from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, OnionResponsesSerializer, OnionProgressSerializer, BotNodeSerializer, BotNodeGeoLocationSerializer
+from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort, OnionRepositoryResponses, OnionRepositoryProgress, BotNode, BotNodeGeoLocation
 
 from rest_framework import filters
 
@@ -34,3 +34,16 @@ class OnionProgressView(viewsets.ModelViewSet):
     serializer_class = OnionProgressSerializer
 
 
+class BotNodeView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = BotNode.objects.all()
+    serializer_class = BotNodeSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('nickname',)
+
+class BotNodeGeoLocationView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = BotNodeGeoLocation.objects.all()
+    serializer_class = BotNodeGeoLocationSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('botnodeid',)

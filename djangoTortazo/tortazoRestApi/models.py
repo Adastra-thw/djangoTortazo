@@ -62,3 +62,28 @@ class OnionRepositoryProgress(models.Model):
         verbose_name = ('onionrepositoryprogress')
         verbose_name_plural = ('onionrepositoryprogress')
         db_table = 'onionrepositoryprogress'
+
+
+class BotNode(models.Model):
+    nickname = models.CharField(max_length=50)
+    userservice = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
+    port = models.IntegerField()
+    servicetype = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = ('botnode')
+        verbose_name_plural = ('botnet')
+        db_table = 'botnetnode'
+
+
+class BotNodeGeoLocation(models.Model):
+    botlatitute= models.CharField(max_length=50)
+    botlongitute= models.CharField(max_length=50)
+    botnodeid = models.ForeignKey('BotNode', db_column='botnetnodeid')
+
+    class Meta:
+        verbose_name = ('botnetgeolocation')
+        verbose_name_plural = ('botnodegeolocation')
+        db_table = 'botnetgeolocation'
