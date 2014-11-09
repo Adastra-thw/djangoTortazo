@@ -4,6 +4,7 @@ from django.db import models
 
 class TortazoScan(models.Model):
     scandate = models.DateTimeField(auto_now=True)
+    numnodes = models.IntegerField(max_length=6)
     class Meta:
         verbose_name = ('scan')
         verbose_name_plural = ('scan')
@@ -87,3 +88,13 @@ class BotNodeGeoLocation(models.Model):
         verbose_name = ('botnetgeolocation')
         verbose_name_plural = ('botnodegeolocation')
         db_table = 'botnetgeolocation'
+
+class TorNodeGeoLocation(models.Model):
+    nodelatitute= models.CharField(max_length=50)
+    nodelongitute= models.CharField(max_length=50)
+    nodeid = models.ForeignKey('TortazoNode', db_column='tortazonodeid')
+
+    class Meta:
+        verbose_name = ('tornodegeolocation')
+        verbose_name_plural = ('tornodegeolocation')
+        db_table = 'tornodegeolocation'

@@ -2,6 +2,7 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, OnionResponsesSerializer, OnionProgressSerializer, BotNodeSerializer, BotNodeGeoLocationSerializer
 from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort, OnionRepositoryResponses, OnionRepositoryProgress, BotNode, BotNodeGeoLocation
+from django.db.models import Count
 
 from rest_framework import filters
 

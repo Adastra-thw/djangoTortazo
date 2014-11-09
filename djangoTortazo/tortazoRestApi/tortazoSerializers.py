@@ -5,7 +5,7 @@ from djangoTortazo.tortazoRestApi.models import TortazoNode, TortazoNodePort, To
 class ScanSerializer(serializers.ModelSerializer):
     class Meta:
         model = TortazoScan
-        fields = ('id', 'scandate')
+        fields = ('id', 'scandate', 'numnodes')
 
 class NodeSerializer(serializers.ModelSerializer):
     class Meta:
