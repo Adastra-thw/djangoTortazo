@@ -26,7 +26,7 @@ class OnionResponsesSerializer(serializers.ModelSerializer):
 
 class OnionProgressSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BotNode
+        model = OnionRepositoryProgress
         fields = ('partialonionaddress', 'validchars', 'startdate',
                   'enddate', 'progressfirstquartet', 'progresssecondquartet',
                   'progressthirdquartet', 'progressfourthquartet')
