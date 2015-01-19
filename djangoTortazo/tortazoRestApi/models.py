@@ -20,6 +20,7 @@ class TortazoNode(models.Model):
     fingerprint = models.CharField(max_length=50)
     torversion = models.CharField(max_length=10)
     contact = models.CharField(max_length=40)
+    operative_system = models.CharField(max_length=20)
     scanid = models.ForeignKey('TortazoScan', db_column='scanid')
     class Meta:
         verbose_name = ('tornodedata')
@@ -92,8 +93,7 @@ class BotNodeGeoLocation(models.Model):
 class TorNodeGeoLocation(models.Model):
     nodelatitute= models.CharField(max_length=50)
     nodelongitute= models.CharField(max_length=50)
-    nodeid = models.ForeignKey('TortazoNode', db_column='tortazonodeid')
-
+    nodeid = models.ForeignKey('TortazoNode', db_column='tornodeid')
     class Meta:
         verbose_name = ('tornodegeolocation')
         verbose_name_plural = ('tornodegeolocation')

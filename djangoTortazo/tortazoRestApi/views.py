@@ -1,7 +1,7 @@
 from rest_framework import permissions
 from rest_framework import viewsets
-from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, OnionResponsesSerializer, OnionProgressSerializer, BotNodeSerializer, BotNodeGeoLocationSerializer
-from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort, OnionRepositoryResponses, OnionRepositoryProgress, BotNode, BotNodeGeoLocation
+from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, NodeGeoLocationSerializer, OnionResponsesSerializer, OnionProgressSerializer, BotNodeSerializer, BotNodeGeoLocationSerializer
+from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort,TorNodeGeoLocation, OnionRepositoryResponses, OnionRepositoryProgress, BotNode, BotNodeGeoLocation
 from django.db.models import Count
 
 from rest_framework import filters
@@ -22,7 +22,15 @@ class TorNodePortView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = TortazoNodePort.objects.all()
     serializer_class = NodePortSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('state','tortazonode',)
 
+class TorNodeGeoLocationView(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = TorNodeGeoLocation.objects.all()
+    serializer_class = NodeGeoLocationSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('nodeid',)
 
 class OnionResponsesView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
