@@ -98,3 +98,36 @@ class TorNodeGeoLocation(models.Model):
         verbose_name = ('tornodegeolocation')
         verbose_name_plural = ('tornodegeolocation')
         db_table = 'tornodegeolocation'
+
+class ShodanInformation(object):
+    '''
+city
+region_code
+os
+ip
+isp
+area_code
+dma_code
+last_update
+country_code3
+country_name
+hostnames
+postal_code
+longitude
+country_code
+ip_str
+latitude
+org
+data
+asn
+ports
+    '''
+    def __init__(self, city, regionCode, isp, areaCode, postalCode, lastUpdate, org, asn):
+        self.city = city 
+        self.regionCode = regionCode 
+        self.isp = isp 
+        self.areaCode = areaCode 
+        self.postalCode = postalCode 
+        self.lastUpdate = lastUpdate 
+        self.org = org
+        self.asn = asn

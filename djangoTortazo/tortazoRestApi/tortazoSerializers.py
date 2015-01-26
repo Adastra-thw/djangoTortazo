@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from djangoTortazo.tortazoRestApi.models import TortazoNode, TortazoNodePort, TorNodeGeoLocation, TortazoScan, OnionRepositoryProgress, OnionRepositoryResponses, BotNode, BotNodeGeoLocation
+from djangoTortazo.tortazoRestApi.models import TortazoNode, TortazoNodePort, TorNodeGeoLocation, TortazoScan, OnionRepositoryProgress, OnionRepositoryResponses, BotNode, BotNodeGeoLocation, ShodanInformation
 
 
 class ScanSerializer(serializers.ModelSerializer):
