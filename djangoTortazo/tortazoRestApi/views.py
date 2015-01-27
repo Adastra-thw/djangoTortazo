@@ -6,7 +6,7 @@ from rest_framework import status
 
 from rest_framework.views import APIView
 from djangoTortazo.tortazoRestApi.tortazoSerializers import ScanSerializer, NodeSerializer, NodePortSerializer, NodeGeoLocationSerializer, OnionResponsesSerializer, OnionProgressSerializer, BotNodeSerializer, BotNodeGeoLocationSerializer
-from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort,TorNodeGeoLocation, OnionRepositoryResponses, OnionRepositoryProgress, BotNode, BotNodeGeoLocation
+from djangoTortazo.tortazoRestApi.models import  TortazoNode, TortazoScan, TortazoNodePort,TorNodeGeoLocation, OnionRepositoryResponses, OnionRepositoryProgress, BotNode, BotNodeGeoLocation, ExecutorShodanModel
 from django.db.models import Count
 
 from rest_framework import filters
@@ -21,7 +21,7 @@ class TorNodeView(viewsets.ModelViewSet):
     queryset = TortazoNode.objects.all()
     serializer_class = NodeSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('nickname','scanid',)
+    filter_fields = ('nickname','scanid','id',)
 
 class TorNodePortView(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -62,6 +62,7 @@ class BotNodeGeoLocationView(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('botnodeid',)
 
+'''
 class CalcClass(object):
 
     def __init__(self, *args, **kw):
@@ -73,18 +74,12 @@ class CalcClass(object):
         # returns a tuple ((1,2,3, ), (4,5,6,))
         result = ((1,2,3, ), (4,5,6,)) # final result
         return result
-
-class MyRESTView(APIView):
-
+'''
+class ExecutorShodanView(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     def get(self, request, *args, **kw):
-        # Process any get params that you may need
-        # If you don't need to process get params,
-        # you can skip this part
-        get_arg1 = request.GET.get('arg1', None)
-        get_arg2 = request.GET.get('arg2', None)
-
-        # Any URL parameters get passed in **kw
-        myClass = CalcClass(get_arg1, get_arg2, *args, **kw)
-        result = myClass.do_work()
+        addressParameter = request.GET.get('address', None)
+        shodanModel = ExecutorShodanModel()
+        result = shodanModel.searchByHost(addressParameter)
         response = Response(result, status=status.HTTP_200_OK)
-        return response
+        return response        

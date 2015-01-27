@@ -1,4 +1,6 @@
 from django.db import models
+import shodan
+from django.conf import settings
 
 # Create your models here.
 
@@ -99,7 +101,8 @@ class TorNodeGeoLocation(models.Model):
         verbose_name_plural = ('tornodegeolocation')
         db_table = 'tornodegeolocation'
 
-class ShodanInformation(object):
+class ExecutorShodanModel(object):
+
     '''
 city
 region_code
@@ -121,7 +124,7 @@ org
 data
 asn
 ports
-    '''
+    
     def __init__(self, city, regionCode, isp, areaCode, postalCode, lastUpdate, org, asn):
         self.city = city 
         self.regionCode = regionCode 
@@ -131,3 +134,18 @@ ports
         self.lastUpdate = lastUpdate 
         self.org = org
         self.asn = asn
+'''
+    def __init__(self):
+        pass
+
+    def searchByHost(self, address):
+        try:
+            shodanApi = shodan.Shodan(settings.SHODAN_DEVELOPER_KEY)
+            results = shodanApi.host(address)
+            return results
+        except shodan.APIError, apiError:
+            if 'Invalid API key' in apiError.value:
+                return {'error' : 'API error. Invalid developer key'}
+            elif 'No information available for that IP.' in apiError.value:
+                return {'error' : 'No information available for that IP'}
+

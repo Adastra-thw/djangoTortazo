@@ -23,5 +23,5 @@ router.register(r'botnet/locations', views.BotNodeGeoLocationView)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^scan/shodan', views.MyRESTView.as_view())
+    url(r'^scan/shodanReference', views.ExecutorShodanView.as_view())
 ]

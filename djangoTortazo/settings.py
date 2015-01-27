@@ -127,3 +127,5 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken'
 )
 
+SHODAN_DEVELOPER_KEY="<YOUR SHODAN KEY>"
+
