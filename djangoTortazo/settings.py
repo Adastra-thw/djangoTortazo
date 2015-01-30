@@ -79,8 +79,8 @@ DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'tortazo',
-            'USER': 'adastra',
-            'PASSWORD': 'adastra',
+            'USER': 'postgres',
+            'PASSWORD': 'p0stgr3s',
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
@@ -127,5 +127,5 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken'
 )
 
-SHODAN_DEVELOPER_KEY="<YOUR SHODAN KEY>"
+SHODAN_DEVELOPER_KEY="<YOUR SHODAN DEVELOPER KEY HERE>"
 
