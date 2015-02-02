@@ -80,7 +80,7 @@ DATABASES = {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'tortazo',
             'USER': 'postgres',
-            'PASSWORD': 'p0stgr3s',
+            'PASSWORD': 'postgres',
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
@@ -104,27 +104,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    '*'
-)
-
-CORS_ALLOW_METHODS = (
-        'GET',
-        'POST',
-        'PATCH',
-        'OPTIONS'
-    )
-
-
-CORS_ALLOW_HEADERS = (
-    'x-requested-with',
-    'content-type',
-    'accept',
-    'origin',
-    'authorization',
-    'x-csrftoken'
+    'http://tortazoweb-adastra.c9.io' # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
 )
 
 SHODAN_DEVELOPER_KEY="<YOUR SHODAN DEVELOPER KEY HERE>"
