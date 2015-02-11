@@ -39,11 +39,12 @@ INSTALLED_APPS = (
     'rest_framework',
     'djangoTortazo.tortazoRestApi',
     'corsheaders',
+    'rest_framework.authtoken',
 )
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 10, 
     'PAGINATE_BY_PARAM': 'page_size'
 }
@@ -107,9 +108,8 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = (
-    'http://tortazoweb-adastra.c9.io' # Here was the problem indeed and it has to be http://localhost:3000, not http://localhost:3000/
+    'http://tortazoweb-adastra.c9.io' 
 )
 
-SHODAN_DEVELOPER_KEY="<YOUR SHODAN DEVELOPER KEY HERE>"
-
-
+SHODAN_DEVELOPER_KEY="XGacliX7RBhkxAT0LgfenUmdtlRsRmjQ"
+MAX_TORTAZO_RELAYS=30
